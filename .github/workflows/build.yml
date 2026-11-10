@@ -18,12 +18,10 @@ jobs:
 
       - name: Generate Xcode Project
         run: |
-          cd PinchSplatAR
           xcodegen generate
 
       - name: Build App
         run: |
-          cd PinchSplatAR
           xcodebuild build \
             -project PinchSplatAR.xcodeproj \
             -scheme PinchSplatAR \
@@ -34,9 +32,10 @@ jobs:
 
       - name: Package to Unsigned IPA
         run: |
-          cd PinchSplatAR
           mkdir -p build/Payload
-          cp -r $(find ~/Library/Developer/Xcode/DerivedData -name "PinchSplatAR.app" | head -n 1) build/Payload/
+          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "PinchSplatAR.app" | head -n 1)
+          echo "Found app at: $APP_PATH"
+          cp -r "$APP_PATH" build/Payload/
           cd build
           zip -r PinchSplatAR.ipa Payload
 
@@ -44,4 +43,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PinchSplatAR-IPA
-          path: PinchSplatAR/build/PinchSplatAR.ipa
+          path: build/PinchSplatAR.ipa
