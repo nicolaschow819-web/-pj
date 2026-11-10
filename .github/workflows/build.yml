@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-latest
 
     steps:
       - name: Checkout Code
@@ -44,3 +44,4 @@ jobs:
         with:
           name: PinchSplatAR-IPA
           path: build/PinchSplatAR.ipa
+
