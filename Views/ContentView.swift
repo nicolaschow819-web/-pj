@@ -101,7 +101,8 @@ struct ContentView: View {
                     }
                 }
                 .padding(.horizontal, screenRecorder.isRecording ? 18 : 0)
-                .frame(minWidth: 64, height: 64)
+                .frame(height: 64)
+                .frame(minWidth: 64)
                 .background(screenRecorder.isRecording ? Color.red.opacity(0.8) : Color.white.opacity(0.2))
                 .clipShape(Capsule())
                 .overlay(Capsule().stroke(Color.white.opacity(0.5), lineWidth: 2))
@@ -141,7 +142,7 @@ struct RPPreviewWrapper: UIViewControllerRepresentable {
     }
 }
 
-extension RPPreviewViewController: Identifiable {
+extension RPPreviewViewController: @retroactive Identifiable {
     public var id: ObjectIdentifier {
         ObjectIdentifier(self)
     }

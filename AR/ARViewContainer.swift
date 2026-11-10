@@ -16,10 +16,12 @@ struct ARViewContainer: UIViewRepresentable {
         config.planeDetection = [.horizontal]
         config.isAutoFocusEnabled = true
         
-        // 绑定手势触发回调
-        handDetector.onPinchTriggered = { [weak context] in
-            guard let context = context, let currentFrame = arView.session.currentFrame else { return }
-            context.coordinator.handlePinchTrigger(from: currentFrame.camera)
+        // 绑定手势触发回调到 coordinator
+        let coordinator = context.coordinator
+        handDetector.onPinchTriggered = { [weak coordinator, weak arView] in
+            guard let coordinator = coordinator,
+                  let currentFrame = arView?.session.currentFrame else { return }
+            coordinator.handlePinchTrigger(from: currentFrame.camera)
         }
         
         arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
