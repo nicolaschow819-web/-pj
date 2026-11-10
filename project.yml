@@ -1,0 +1,32 @@
+name: PinchSplatAR
+options:
+  bundleIdPrefix: com.pinchsplat
+  deploymentTarget:
+    iOS: "17.0"
+targets:
+  PinchSplatAR:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Views
+      - path: AR
+      - path: Gesture
+      - path: Renderer
+      - path: Recorder
+      - path: Resources
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: "PinchSplat"
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+    dependencies:
+      - package: MetalSplatter
+packages:
+  MetalSplatter:
+    url: https://github.com/scier/MetalSplatter
+    from: 1.0.0
